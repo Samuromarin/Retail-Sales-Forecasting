@@ -1,49 +1,89 @@
-# Retail Sales Forecasting
+# 📈 Retail Sales Forecasting
 
-Proyecto de series temporales sobre ventas de una empresa retail online (**TodoVentas S.A.**) con el objetivo de predecir las ventas del mes de diciembre de 2023 por país, en el contexto de una decisión de ampliación de capital.
+End-to-end time series forecasting project applied to **TodoVentas S.A.**, an online retail company operating across 10 European countries. The goal is to generate a sales forecast for December 2023 to support a capital increase decision.
 
-## Objetivo
+---
 
-Comparar tres modelos de predicción (**Prophet**, **SARIMAX** y **XGBoost**) sobre datos de ventas semanales, seleccionar el más adecuado y generar una estimación de ventas para diciembre 2023.
+## 🏢 Business Context
 
-## Dataset
+The finance team needs a December 2023 sales estimate broken down by country to present to shareholders.
 
-Datos de ventas diarias de TodoVentas S.A. entre diciembre 2022 y diciembre 2023, con transacciones en 10 países europeos. United Kingdom representa el 93% de las ventas totales.
+**United Kingdom** accounts for 93% of total revenue, showing clear seasonality around Black Friday and Christmas. International markets show a more irregular pattern with lower volume.
 
-## Estructura del proyecto
+---
 
-    ├── TodoVentas_proyecto_final.ipynb   # Notebook principal
-    ├── retail_todo_ventas.csv            # Dataset de ventas
-    └── prod_dict.csv                     # Diccionario de productos
+## 📊 Dataset
 
-## Metodología
+Daily sales data from December 2022 to December 2023 (`retail_todo_ventas.csv`), with transactions across 10 European countries. After filtering out returns and zero-sales days, data is aggregated to weekly frequency.
 
-- **Preprocesamiento**: limpieza de datos, agregación semanal por país
-- **Análisis exploratorio**: descomposición de la serie, test ADF, ACF/PACF
-- **Modelado UK**: comparativa de Prophet, SARIMAX y XGBoost con test en noviembre 2023
-- **Variables exógenas**: festivos UK, Black Friday, temporada navideña, cierre navideño
-- **Predicción final**: XGBoost aplicado a UK y 9 mercados internacionales
+> The dataset is not included in this repository.
 
-## Resultados
+---
 
-| Modelo | RMSE | MAPE |
-|--------|------|------|
+## 🔬 Methodology
+
+The analysis focuses on the UK market (93% of sales) and applies the selected model to 9 international markets.
+
+**Pipeline:**
+
+    Daily data → EDA + descriptive analysis → Stationarity tests (ADF) + ACF/PACF
+    → Train/test split (last 4 weeks as holdout) → Three models trained and evaluated
+    → Best model selected → Final forecast for December 2023
+
+---
+
+## 🤖 Models
+
+| Model | Description |
+|-------|-------------|
+| **Prophet** | Meta's forecasting library for time series with trend and seasonality |
+| **SARIMAX** | Classical statistical model with orders selected via `auto_arima` |
+| **XGBoost** | Gradient boosting adapted to time series via `sktime` with recursive strategy |
+
+---
+
+## 📈 Results
+
+| Model | RMSE | MAPE |
+|-------|------|------|
 | Prophet | 118,111 | 37.72% |
 | SARIMAX | 49,995 | 14.37% |
 | XGBoost | 62,046 | 16.55% |
 
-> Métricas sobre el periodo de test (noviembre 2023). SARIMAX baseline produce una línea constante — al incorporar variables exógenas deja de serlo pero el MAPE sube a 41.32% por falta de histórico suficiente para calibrar el Black Friday.
+> Metrics evaluated on the test period (November 2023). SARIMAX baseline produces a flat line — adding exogenous variables removes this but MAPE rises to 41.32%, as one year of data is insufficient to calibrate the Black Friday effect.
 
-**XGBoost** fue seleccionado como modelo final por generar predicciones más realistas semana a semana.
+**XGBoost** was selected as the final model for generating more realistic week-by-week predictions.
 
-Estimación total diciembre 2023: **£1,257,821** (UK: 91%, mercados internacionales: 9%)
+**Total estimated sales for December 2023: £1,257,821** (UK: 91%, international markets: 9%)
 
-## Principales conclusiones
+---
 
-- La serie muestra una **tendencia ascendente sostenida** a lo largo de 2023
-- Las variables exógenas no mejoran los modelos con solo un año de histórico — el Black Friday cae en test y no puede aprenderse en train
-- Con 2-3 años de datos la precisión mejoraría significativamente al capturar la estacionalidad de diciembre
+## 🧠 Interpretability
 
-## Tecnologías
+**SHAP values** are included to explain XGBoost predictions. Week of year and recent lags are the most influential features for the UK market.
 
-Python · Pandas · Prophet · SARIMAX · XGBoost · sktime · Plotly
+---
+
+## 📁 Project Structure
+
+    ├── TodoVentas_proyecto_final.ipynb   # Main notebook
+    ├── retail_todo_ventas.csv            # Sales dataset
+    └── prod_dict.csv                     # Product dictionary
+
+---
+
+## ▶️ How to Run
+
+1. Clone the repository
+2. Install dependencies:
+```bash
+pip install pandas numpy matplotlib seaborn plotly statsmodels pmdarima prophet xgboost sktime scikit-learn
+```
+3. Place `retail_todo_ventas.csv` and `prod_dict.csv` in the project root
+4. Run `TodoVentas_proyecto_final.ipynb` top to bottom
+
+---
+
+## 🛠️ Stack
+
+`Python` · `Pandas` · `Prophet` · `Statsmodels` · `SARIMAX` · `XGBoost` · `sktime` · `Plotly`
