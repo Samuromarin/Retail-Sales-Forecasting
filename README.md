@@ -46,4 +46,4 @@ Estimación total diciembre 2023: **£1,257,821** (UK: 91%, mercados internacion
 
 ## Tecnologías
 
-Python · Pandas · Prophet · Statsmodels · XGBoost · sktime · Plotly
+Python · Pandas · Prophet · SARIMAX · XGBoost · sktime · Plotly
