@@ -11,9 +11,10 @@ Comparar tres modelos de predicción (**Prophet**, **SARIMAX** y **XGBoost**) so
 Datos de ventas diarias de TodoVentas S.A. entre diciembre 2022 y diciembre 2023, con transacciones en 10 países europeos. United Kingdom representa el 93% de las ventas totales.
 
 ## Estructura del proyecto
-├── TodoVentas_proyecto_final.ipynb   # Notebook principal
-├── retail_todo_ventas.csv            # Dataset de ventas
-└── prod_dict.csv                     # Diccionario de productos
+
+    ├── TodoVentas_proyecto_final.ipynb   # Notebook principal
+    ├── retail_todo_ventas.csv            # Dataset de ventas
+    └── prod_dict.csv                     # Diccionario de productos
 
 ## Metodología
 
