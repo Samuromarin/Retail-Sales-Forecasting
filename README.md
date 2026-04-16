@@ -58,15 +58,9 @@ The analysis focuses on the UK market (93% of sales) and applies the selected mo
 
 ---
 
-## 🧠 Interpretability
-
-**SHAP values** are included to explain XGBoost predictions. Week of year and recent lags are the most influential features for the UK market.
-
----
-
 ## 📁 Project Structure
 
-    ├── TodoVentas_proyecto_final.ipynb   # Main notebook
+    ├── retail_sales_forecasting.ipynb    # Main notebook
     ├── retail_todo_ventas.csv            # Sales dataset
     └── prod_dict.csv                     # Product dictionary
 
@@ -80,7 +74,7 @@ The analysis focuses on the UK market (93% of sales) and applies the selected mo
 pip install pandas numpy matplotlib seaborn plotly statsmodels pmdarima prophet xgboost sktime scikit-learn
 ```
 3. Place `retail_todo_ventas.csv` and `prod_dict.csv` in the project root
-4. Run `TodoVentas_proyecto_final.ipynb` top to bottom
+4. Run `retail_sales_forecasting.ipynb` top to bottom
 
 ---
 
